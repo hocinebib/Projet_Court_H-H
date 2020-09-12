@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 """
 
-program that 
+program that creates a sphere around each atom
 
 """
 import numpy as np
@@ -77,7 +77,7 @@ def spheres2(atoms_coor, n):
 		points = np.zeros((n, 3))
 		points[:,0] = radius * np.cos(theta) * np.sin(phi) + center[0]
 		points[:,1] = radius * np.sin(theta) * np.sin(phi) + center[1]
-		points[:,2] = np.cos(phi) + center[2]
+		points[:,2] = radius * np.cos(phi) + center[2]
 
 		atom_sphere.append(points)
 
