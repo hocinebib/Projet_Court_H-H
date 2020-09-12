@@ -85,6 +85,35 @@ def spheres2(atoms_coor, n):
 	
 	return sphere_lst
 
+
+def sphere1(n):
+	"""
+	"""
+	golden_angle = np.pi * (3 - np.sqrt(5))
+
+    theta = golden_angle * np.arange(n)
+
+    z = np.linspace(1 - 1.0 / n, 1.0 / n - 1, n)
+    
+    radius = np.sqrt(1 - z * z)
+    
+    points = np.zeros((n, 3))
+    
+    points[:,0] = radius * np.cos(theta)
+    points[:,1] = radius * np.sin(theta)
+    points[:,2] = z
+        
+    return points
+
+def roll_sphere(sphere_pts, atoms_coor):
+	"""
+	"""
+	new_sphere[:,0]=new_sphere[:,0]+atoms_coor[0]
+	new_sphere[:,1]=new_sphere[:,1]+atoms_coor[1]
+	new_sphere[:,2]=new_sphere[:,2]+atoms_coor[2]
+
+	return new_sphere
+
 if __name__ == "__main__":
 	import sphere_pts
 	print(help(sphere_pts))
