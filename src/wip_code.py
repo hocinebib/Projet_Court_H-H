@@ -57,3 +57,12 @@ def roll_sphere(atoms_df):
 	"""
 	for row in atoms_df.iterrows():
 		spheres(row)
+
+def pts_dist(pt1, pt2):
+	"""
+	"""
+
+	squared_dist = np.sum((pt1-pt2)**2, axis = 0)
+	dist = np.sqrt(squared_dist)
+
+	return dist
