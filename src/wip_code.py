@@ -33,7 +33,7 @@ def atom_coor(pdbfile):
 
 	return atoms_df
 
-def spheres(atom_tpl, n):
+def spheres(n):#atom_tpl, n):
 	"""
 	"""
 
@@ -41,22 +41,27 @@ def spheres(atom_tpl, n):
 	golden_angle = np.pi * (1 + 5**0.5)
 	phi = np.arccos(1 - 2*indices/n)
 	theta = golden_angle * indices
-	center = atom_tpl['coor']#atom_tpl[1][2]
+	#center = atom_tpl['coor']#atom_tpl[1][2]
 	
-	radius = VDW_RADIUS[atom_tpl['atom']] + VDW_RADIUS['O']#VDW_RADIUS[atom_tpl[1][1]]
+	#radius = VDW_RADIUS[atom_tpl['atom']] + VDW_RADIUS['O']#VDW_RADIUS[atom_tpl[1][1]]
 
 	points = np.zeros((n, 3))
-	points[:,0] = radius * np.cos(theta) * np.sin(phi) + center[0]
-	points[:,1] = radius * np.sin(theta) * np.sin(phi) + center[1]
-	points[:,2] = radius * np.cos(phi) + center[2]
+	points[:,0] = np.cos(theta) * np.sin(phi) #radius * np.cos(theta) * np.sin(phi) + center[0]
+	points[:,1] = np.sin(theta) * np.sin(phi) #radius * np.sin(theta) * np.sin(phi) + center[1]
+	points[:,2] = np.cos(phi) #radius * np.cos(phi) + center[2]
 
 	return points
 
-def roll_sphere(atoms_df):
+def roll_sphere(atoms_df,n):
 	"""
 	"""
+	sphere_pts=spheres(n)
 	for row in atoms_df.iterrows():
-		spheres(row)
+		radius = VDW_RADIUS[row[1][1]]
+		sphere_pts[:,0] = sphere_pts[:,0] * radius + row[1][2][0]
+		sphere_pts[:,1] = sphere_pts[:,1] * radius + row[1][2][1]
+		sphere_pts[:,2] = sphere_pts[:,2] * radius + row[1][2][2]
+	
 
 def pts_dist(pt1, pt2):
 	"""
