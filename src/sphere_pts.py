@@ -28,7 +28,9 @@ def spheres(atoms_coor, n):
 	
 	for atom in atoms_coor:
 
-		sphere_lst.append(atom[0])
+		atom_sphere = []
+
+		atom_sphere.append(atom[0])
 
 		center = atom[1]
 		theta = golden_angle * np.arange(n)
@@ -36,11 +38,53 @@ def spheres(atoms_coor, n):
 
 		radius = VDW_RADIUS[atom[0]] + VDW_RADIUS['O']
 
-		points = numpy.zeros((n, 3))
-		points[:,0] = radius * numpy.cos(theta) + center[0]
-		points[:,1] = radius * numpy.sin(theta) + center[1]
+		points = np.zeros((n, 3))
+		points[:,0] = radius * np.cos(theta) + center[0]
+		points[:,1] = radius * np.sin(theta) + center[1]
 		points[:,2] = z + center[2]
 
-		sphere_lst.append(points)
+		atom_sphere.append(points)
+
+		sphere_lst.append(atom_sphere)
 	
 	return sphere_lst
+
+
+def spheres2(atoms_coor, n):
+	"""
+	atoms_coor : the list that arom_coor returns
+	n : the number of points distributed on the sphere
+	golden angle algorithm
+	"""
+
+	sphere_lst = []
+
+	indices = np.arange(0, n, dtype=float) + 0.5
+	golden_angle = np.pi * (1 + 5**0.5)
+	phi = np.arccos(1 - 2*indices/n)
+	theta = golden_angle * indices
+	
+	for atom in atoms_coor:
+
+		atom_sphere = []
+
+		atom_sphere.append(atom[0])
+
+		center = atom[1]
+
+		radius = VDW_RADIUS[atom[0]] + VDW_RADIUS['O']
+
+		points = np.zeros((n, 3))
+		points[:,0] = radius * np.cos(theta) * np.sin(phi) + center[0]
+		points[:,1] = radius * np.sin(theta) * np.sin(phi) + center[1]
+		points[:,2] = np.cos(phi) + center[2]
+
+		atom_sphere.append(points)
+
+		sphere_lst.append(atom_sphere)
+	
+	return sphere_lst
+
+if __name__ == "__main__":
+	import sphere_pts
+	print(help(sphere_pts))
