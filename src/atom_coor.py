@@ -9,7 +9,9 @@ def atom_coor(pdbfile):
 	"""
 	the function that reads the pdb file and extracts the atoms coordinates
 
-	it returns as a result
+	it returns as a result a list of lists containing the atom name and its 
+
+	coordinates
 	"""
 	coor_lst=[]
 
