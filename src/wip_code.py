@@ -6,6 +6,7 @@
 """
 import numpy as np
 import pandas as pd
+from scipy.spatial import distance_matrix
 
 VDW_RADIUS = {'H':1.20, 'C':1.7, 'N':1.55, 'O':1.52, 'CL':1.75, 'F':1.47, 'P':1.80, 
 'S':1.80, 'CU':1.40, 'HE':1.40, 'LI':1.82, 'BE':1.53, 'B':1.92, 'NE':1.54, 'NA':2.27,
@@ -71,3 +72,8 @@ def pts_dist(pt1, pt2):
 	dist = np.sqrt(squared_dist)
 
 	return dist
+
+def atom_dist_matrix(dico):
+	"""
+	"""
+	return pd.DataFrame(distance_matrix(dico.iloc[:,3:],dico.iloc[:,3:]), index=dico.iloc[:,3:].index, columns=dico.iloc[:,3:].index)
