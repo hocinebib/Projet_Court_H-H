@@ -58,10 +58,10 @@ def roll_sphere(atoms_df,n):
 	"""
 	sphere_pts=spheres(n)
 	for row in atoms_df.iterrows():
-		radius = VDW_RADIUS[row[1][1]]
-		sphere_pts[:,0] = sphere_pts[:,0] * radius + row[1][2][0]
-		sphere_pts[:,1] = sphere_pts[:,1] * radius + row[1][2][1]
-		sphere_pts[:,2] = sphere_pts[:,2] * radius + row[1][2][2]
+		radius = VDW_RADIUS[row[1][0]]
+		sphere_pts[:,0] = sphere_pts[:,0] * radius + row[1][3]
+		sphere_pts[:,1] = sphere_pts[:,1] * radius + row[1][4]
+		sphere_pts[:,2] = sphere_pts[:,2] * radius + row[1][5]
 	
 
 def pts_dist(pt1, pt2):
@@ -73,7 +73,7 @@ def pts_dist(pt1, pt2):
 
 	return dist
 
-def atom_dist_matrix(dico):
+def atom_dist_matrix(df_coor):
 	"""
 	"""
-	return pd.DataFrame(distance_matrix(dico.iloc[:,3:],dico.iloc[:,3:]), index=dico.iloc[:,3:].index, columns=dico.iloc[:,3:].index)
+	return pd.DataFrame(distance_matrix(df_coor.iloc[:,3:],df_coor.iloc[:,3:]), index=df_coor.iloc[:,3:].index, columns=df_coor.iloc[:,3:].index)

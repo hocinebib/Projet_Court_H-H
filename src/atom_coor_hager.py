@@ -20,7 +20,7 @@ def coord(fichier_pdb):
                 dico = {}
                 
                 # Extraction de l'atome
-                dico["atom"] = str(ligne[13:14])
+                dico["atom"] = str(ligne[13:14].strip())
                 
                 # Extraction du nom du résidu.
                 dico["residu "] = str(ligne[17:21])
