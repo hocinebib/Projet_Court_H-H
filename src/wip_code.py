@@ -95,4 +95,5 @@ def threshold_dict(trsh):
 			if (r[a][b]<2) & (a!=b):
 				lst.append(b)
 		dico[a]=lst
- 
+
+	return dico
