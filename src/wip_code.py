@@ -106,4 +106,18 @@ def link_fct(df_coor, dico_trsh):
 		lst.append(key)
 		for neighb in dico_trsh[key]:
 			lst.append(neighb)
-		roll_sphere(df_coor.iloc[lst,])
+		roll_sphere_bis(df_coor.iloc[lst,])
+
+def roll_sphere_bis(atoms_df,n):
+	"""
+	"""
+	sph_lst=[]
+	for row in atoms_df.iterrows():
+		sphere_pts=spheres(n)
+		radius = VDW_RADIUS[row[1][0]]
+		sphere_pts[:,0] = sphere_pts[:,0] * radius + row[1][3]
+		sphere_pts[:,1] = sphere_pts[:,1] * radius + row[1][4]
+		sphere_pts[:,2] = sphere_pts[:,2] * radius + row[1][5]
+		sph_lst.append(sphere_pts)
+
+	
