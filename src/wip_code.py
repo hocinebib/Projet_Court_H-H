@@ -111,12 +111,20 @@ def link_fct(df_coor, dico_trsh, n):
 	"""
 	link between roll_sphere_bis and distance calculation
 	"""
+	new_dico = {}
 	for key in dico_trsh:
 		lst=[]
 		lst.append(key)
 		for neighb in dico_trsh[key]:
 			lst.append(neighb)
-		return roll_sphere_bis(df_coor.iloc[lst,], n) #return
+		sph_lst = roll_sphere_bis(df_coor.iloc[lst,], n) #return
+
+		new_dico[key]=[]
+		for i in range(len(sph_lst)):
+			if spheres_dist(sph_lst[0], sph_lst[i]):
+				new_dico[key].append(dico_trsh[key][i])
+	return new_dico
+
 		#une boucle sur len(liste de spheres) appel a spheres_dist(listedesphere[0], listedespheres[i])
 		#nous retourne si dist entre atome1 et ses voisins permet mol d'eau
 
@@ -146,4 +154,8 @@ def spheres_dist(s1, s2):
 			dsts.append(new)
 			if new < low_dst :
 				low_dst = new
-	#if low_dst < valeur molécule d'eau (1.9 ?) -> non accessible ?
+	if low_dst > 1.8:
+		return True
+	else :
+		return False
+	#if low_dst < valeur molécule d'eau (1.8 ?) -> non accessible ?
