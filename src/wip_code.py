@@ -16,6 +16,9 @@ VDW_RADIUS = {'H':1.20, 'C':1.7, 'N':1.55, 'O':1.52, 'CL':1.75, 'F':1.47, 'P':1.
 'I':1.98, 'XE':2.16, 'CS':3.43, 'BA':2.68, 'PT':1.75, 'AU':1.66, 'HG':1.55, 'TL':1.96, 
 'PB':2.02, 'BI':2.07, 'PO':1.97, 'AT':2.02, 'RN':2.20, 'FR':3.48, 'RA':2.83, 'U':1.86}
 
+TRSHD = (VDW_RADIUS['H'] + VDW_RADIUS['O'] + VDW_RADIUS['H'] + ((VDW_RADIUS['C'] * 3) +  VDW_RADIUS['N']))
+#eau 1.4 A
+
 def atom_coor(pdbfile):
 	"""
 	"""
@@ -98,7 +101,7 @@ def threshold_dict(trsh, mtx):
 
 	return dico_trsh
 
-def link_fct(df_coor, dico_trsh):
+def link_fct(df_coor, dico_trsh, n):
 	"""
 	"""
 	for key in dico_trsh:
@@ -106,9 +109,9 @@ def link_fct(df_coor, dico_trsh):
 		lst.append(key)
 		for neighb in dico_trsh[key]:
 			lst.append(neighb)
-		roll_sphere_bis(df_coor.iloc[lst,])
+		return roll_sphere_bis(df_coor.iloc[lst,], n) #return
 
-def roll_sphere_bis(atoms_df,n):
+def roll_sphere_bis(atoms_df, n):
 	"""
 	"""
 	sph_lst=[]
@@ -119,5 +122,17 @@ def roll_sphere_bis(atoms_df,n):
 		sphere_pts[:,1] = sphere_pts[:,1] * radius + row[1][4]
 		sphere_pts[:,2] = sphere_pts[:,2] * radius + row[1][5]
 		sph_lst.append(sphere_pts)
+	return sph_lst
 
-	
+def spheres_dist(s1, s2):
+	"""
+	"""
+	low_dst = 100
+	dsts=[]
+	for i in range(len(s1)):
+		for j in range(len(s1)):
+			new = pts_dist(s1[i],s2[j])
+			dsts.append(new)
+			if new < low_dst :
+				low_dst = new
+	#if low_dst < veleur molécule d'eau + 2 rayons vdw -> non accessible ?
