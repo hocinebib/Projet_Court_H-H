@@ -21,6 +21,7 @@ TRSHD = (VDW_RADIUS['H'] + VDW_RADIUS['O'] + VDW_RADIUS['H'] + ((VDW_RADIUS['C']
 
 def atom_coor(pdbfile):
 	"""
+	extracts atom coordinates
 	"""
 	atoms_dict = {'residu':[], 'atom':[], 'coor':[]}
 
@@ -39,6 +40,7 @@ def atom_coor(pdbfile):
 
 def spheres(n):#atom_tpl, n):
 	"""
+	creates a sphere
 	"""
 
 	indices = np.arange(0, n, dtype=float) + 0.5
@@ -58,6 +60,7 @@ def spheres(n):#atom_tpl, n):
 
 def roll_sphere(atoms_df,n):
 	"""
+	changes sphere's radius and center
 	"""
 	sphere_pts=spheres(n)
 	for row in atoms_df.iterrows():
@@ -69,6 +72,7 @@ def roll_sphere(atoms_df,n):
 
 def pts_dist(pt1, pt2):
 	"""
+	calculates distance between two points (or all points of 2 df)
 	"""
 
 	squared_dist = np.sum((pt1-pt2)**2, axis = 0)
@@ -78,11 +82,13 @@ def pts_dist(pt1, pt2):
 
 def atom_dist_matrix(df_coor):
 	"""
+	creates distance matrix between all atoms
 	"""
 	return pd.DataFrame(distance_matrix(df_coor.iloc[:,3:],df_coor.iloc[:,3:]), index=df_coor.iloc[:,3:].index, columns=df_coor.iloc[:,3:].index)
 
 def threshold_dict(trsh, mtx):
 	"""
+	creates a dictionary having as keys the atom and as values the atom neighbors
 	"""
 	r=[]
 	i=[]
@@ -103,6 +109,7 @@ def threshold_dict(trsh, mtx):
 
 def link_fct(df_coor, dico_trsh, n):
 	"""
+	link between roll_sphere_bis and distance calculation
 	"""
 	for key in dico_trsh:
 		lst=[]
@@ -110,9 +117,12 @@ def link_fct(df_coor, dico_trsh, n):
 		for neighb in dico_trsh[key]:
 			lst.append(neighb)
 		return roll_sphere_bis(df_coor.iloc[lst,], n) #return
+		#une boucle sur len(liste de spheres) appel a spheres_dist(listedesphere[0], listedespheres[i])
+		#nous retourne si dist entre atome1 et ses voisins permet mol d'eau
 
 def roll_sphere_bis(atoms_df, n):
 	"""
+	the roll_sphere that I actualy use
 	"""
 	sph_lst=[]
 	for row in atoms_df.iterrows():
@@ -126,6 +136,7 @@ def roll_sphere_bis(atoms_df, n):
 
 def spheres_dist(s1, s2):
 	"""
+	calculates distance between points of 2 spheres
 	"""
 	low_dst = 100
 	dsts=[]
@@ -135,4 +146,4 @@ def spheres_dist(s1, s2):
 			dsts.append(new)
 			if new < low_dst :
 				low_dst = new
-	#if low_dst < veleur molécule d'eau (1.9 ?) -> non accessible ?
+	#if low_dst < valeur molécule d'eau (1.9 ?) -> non accessible ?
