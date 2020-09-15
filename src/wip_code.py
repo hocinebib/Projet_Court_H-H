@@ -135,4 +135,4 @@ def spheres_dist(s1, s2):
 			dsts.append(new)
 			if new < low_dst :
 				low_dst = new
-	#if low_dst < veleur molécule d'eau + 2 rayons vdw -> non accessible ?
+	#if low_dst < veleur molécule d'eau (1.9 ?) -> non accessible ?
