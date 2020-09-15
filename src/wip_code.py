@@ -78,22 +78,32 @@ def atom_dist_matrix(df_coor):
 	"""
 	return pd.DataFrame(distance_matrix(df_coor.iloc[:,3:],df_coor.iloc[:,3:]), index=df_coor.iloc[:,3:].index, columns=df_coor.iloc[:,3:].index)
 
-def threshold_dict(trsh):
+def threshold_dict(trsh, mtx):
 	"""
 	"""
 	r=[]
 	i=[]
 
-	for index, row in dt1.iterrows():
+	for index, row in mtx.iterrows():
 		r.append(row)
 		i.append(index)
 
-	dico={}
+	dico_trsh={}
 	for a in range(len(i)):
 		lst=[]
 		for b in range(len(r[a])-1):
-			if (r[a][b]<2) & (a!=b):
+			if (r[a][b]<trsh) & (a!=b):
 				lst.append(b)
-		dico[a]=lst
+		dico_trsh[a]=lst
 
-	return dico
+	return dico_trsh
+
+def link_fct(df_coor, dico_trsh):
+	"""
+	"""
+	for key in dico_trsh:
+		lst=[]
+		lst.append(key)
+		for neighb in dico_trsh[key]:
+			lst.append(neighb)
+		roll_sphere(df_coor.iloc[lst,])
