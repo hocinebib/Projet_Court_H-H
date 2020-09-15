@@ -77,3 +77,22 @@ def atom_dist_matrix(df_coor):
 	"""
 	"""
 	return pd.DataFrame(distance_matrix(df_coor.iloc[:,3:],df_coor.iloc[:,3:]), index=df_coor.iloc[:,3:].index, columns=df_coor.iloc[:,3:].index)
+
+def threshold_dict(trsh):
+	"""
+	"""
+	r=[]
+	i=[]
+
+	for index, row in dt1.iterrows():
+		r.append(row)
+		i.append(index)
+
+	dico={}
+	for a in range(len(i)):
+		lst=[]
+		for b in range(len(r[a])-1):
+			if (r[a][b]<2) & (a!=b):
+				lst.append(b)
+		dico[a]=lst
+ 
