@@ -120,7 +120,7 @@ def link_fct(df_coor, dico_trsh, n):
 		sph_lst = roll_sphere_bis(df_coor.iloc[lst,], n) #return
 
 		new_dico[key]=[]
-		for i in range(len(sph_lst)):
+		for i in range(len(sph_lst)-1):
 			if spheres_dist(sph_lst[0], sph_lst[i]):
 				new_dico[key].append(dico_trsh[key][i])
 	return new_dico
@@ -158,4 +158,3 @@ def spheres_dist(s1, s2):
 		return True
 	else :
 		return False
-	#if low_dst < valeur molécule d'eau (1.8 ?) -> non accessible ?
