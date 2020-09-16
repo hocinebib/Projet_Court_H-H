@@ -95,7 +95,7 @@ def threshold_dict(mtx):#, df_coor):
     pbar = ProgressBar()
     r = []
     i = []
-    TRS_MAX = VDW_RADIUS['C'] * 2 + VDW_RADIUS['N'] + 1.4
+    TRS_MAX = VDW_RADIUS['C'] * 2 + VDW_RADIUS['N'] + (1.4 * 2)
 
     for index, row in mtx.iterrows():
         r.append(row)
@@ -162,7 +162,7 @@ def spheres_dist(s1, s2):#, vdm_r):
     nonenf = False
     for i in range(len(s1)):
         for j in range(len(s1)):
-            if pts_dist(s1[i],s2[j]) < 1.8 :
+            if pts_dist(s1[i],s2[j]) < 2.8 :
                 nonenf = False
                 break
             else :
@@ -186,4 +186,39 @@ def complete_time(start, end):
         return "{:2.0f} min {:2.0f} sec".format(minu, sec)
     else:
         return "{:3.0f} h {:2.0f} min {:2.0f} sec".format(hrs, minu, sec)
+
+
+def ratio(pts_exp, n):
+    """
+    """
+    lst=[]
+    new_dict={}
+    count = 0
+    for key in pts_exp :
+        if int(key.split()[0]) != count :
+            count += 1
+            new_dict[key.split()[0]] = [lst, len(lst)]
+            lst = []
+        if pts_exp[key] != 0 :
+            lst.append(pts_exp[key])
+    new_dict2={}
+    for key in new_dict :
+        new_dict2[key] = (sum(new_dict[key][0]) / new_dict[key][1]) / n
+
+    return new_dict2
+
+def acc_surf(exp_pts_dc, atoms_df):
+    """
+    """
+    surf_dc={}
+    for key in exp_pts_dc :
+        surf_dc[key] = exp_pts_dc[key] * 4 * np.pi + (VDW_RADIUS[atoms_df.iloc[int(key),0]])**2
+    return surf_dc
+
+def res_surf(surf_dc, atoms_df):
+    """
+    """
+    res = atoms_df.iloc[0,1]
+    for key in surf_dc :
+        if surf_dc[key,1] == res
 
