@@ -32,5 +32,7 @@ Calcul de la surface accessible au solvant d’une protéine
 ## Result exemple :
 
 ## Authors :
-
+-Hocine Merouana
+-Hager Elharty
+-Sleheddine Kastalli
 
