@@ -100,13 +100,13 @@ def threshold_dict(trsh, mtx):
 		r.append(row)
 		i.append(index)
 
-	dico_trsh={}
+	dico_trsh = {}
 	for a in pbar(range(len(i))):
-		lst=[]
+		lst = []
 		for b in range(len(r[a])-1):
 			if (r[a][b]<trsh) & (a!=b):
 				lst.append(b)
-		dico_trsh[a]=lst
+		dico_trsh[a] = lst
 
 	return dico_trsh
 
@@ -114,19 +114,22 @@ def link_fct(df_coor, dico_trsh, n):
 	"""
 	link between roll_sphere_bis and distance calculation
 	"""
+	START = time.time()
 	pbar = ProgressBar()
 	new_dico = {}
 	for key in pbar(dico_trsh):
-		lst=[]
+		lst = []
 		lst.append(key)
 		for neighb in dico_trsh[key]:
 			lst.append(neighb)
 		sph_lst = roll_sphere_bis(df_coor.iloc[lst,], n) #return
 
-		new_dico[key]=[]
+		new_dico[key] = []
 		for i in range(len(sph_lst)-1):
 			if spheres_dist(sph_lst[0], sph_lst[i]):
 				new_dico[key].append(dico_trsh[key][i])
+	END = time.time()
+	print("time elapsed :" + complete_time(START, END))
 	return new_dico
 
 		#une boucle sur len(liste de spheres) appel a spheres_dist(listedesphere[0], listedespheres[i])
