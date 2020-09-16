@@ -7,6 +7,8 @@
 import numpy as np
 import pandas as pd
 from scipy.spatial import distance_matrix
+from progressbar import ProgressBar
+import time
 
 VDW_RADIUS = {'H':1.20, 'C':1.7, 'N':1.55, 'O':1.52, 'CL':1.75, 'F':1.47, 'P':1.80, 
 'S':1.80, 'CU':1.40, 'HE':1.40, 'LI':1.82, 'BE':1.53, 'B':1.92, 'NE':1.54, 'NA':2.27,
@@ -90,6 +92,7 @@ def threshold_dict(trsh, mtx):
 	"""
 	creates a dictionary having as keys the atom and as values the atom neighbors
 	"""
+	pbar = ProgressBar()
 	r=[]
 	i=[]
 
@@ -98,7 +101,7 @@ def threshold_dict(trsh, mtx):
 		i.append(index)
 
 	dico_trsh={}
-	for a in range(len(i)):
+	for a in pbar(range(len(i))):
 		lst=[]
 		for b in range(len(r[a])-1):
 			if (r[a][b]<trsh) & (a!=b):
@@ -111,8 +114,9 @@ def link_fct(df_coor, dico_trsh, n):
 	"""
 	link between roll_sphere_bis and distance calculation
 	"""
+	pbar = ProgressBar()
 	new_dico = {}
-	for key in dico_trsh:
+	for key in pbar(dico_trsh):
 		lst=[]
 		lst.append(key)
 		for neighb in dico_trsh[key]:
@@ -158,3 +162,19 @@ def spheres_dist(s1, s2):
 		return True
 	else :
 		return False
+
+def complete_time(start, end):
+	"""
+	function that gives the time duration in hours minutes and seconds
+	"""
+	total = end - start
+	hrs = total // 3600
+	minu = (total % 3600) // 60
+	sec = (total % 3600) % 60
+	if total < 60:
+		return "{:2.0f} sec".format(sec)
+	elif total < 3600:
+		return "{:2.0f} min {:2.0f} sec".format(minu, sec)
+	else:
+		return "{:3.0f} h {:2.0f} min {:2.0f} sec".format(hrs, minu, sec)
+
