@@ -1,8 +1,10 @@
 # Projet Court (Sujet 2) :
+
 ---
 ## Description :
 
 Calcul de la surface accessible au solvant d’une protéine
+
 ---
 ## Requirements :
 Python3, Pandas, Argparse, Numpy, Scipy, Progressbar, Time
@@ -35,17 +37,20 @@ $ conda install -c conda-forge progressbar
 - NACCESS
 
 ### Script files :
-**main.py**
+`main.py`
 
-**acoord_atom.py**
+`acoord_atom.py`
 
-**sph_dist**
+`sph_dist`
 
-**access_surf.py**
+`access_surf.py`
 
-**time_complete.py**
+`time_complete.py`
 
-**parse_rsa.py**
+`parse_rsa.py`
+
+`comp_plot.py`
+
 ---
 ## Usage :
 1. Cloning the repository :
