@@ -23,10 +23,15 @@ Python3, Pandas, Argparse, Numpy, Scipy, Progressbar, Time
 - NACCESS
 ### Script files :
 **main.py**
+
 **acoord_atom.py**
+
 **sph_dist**
+
 **access_surf.py**
+
 **time_complete.py**
+
 **parse_rsa.py**
 
 ## Usage :
@@ -50,6 +55,8 @@ asa = dictionnaire contenant les noms des residus en clef, et les surfaces acces
 
 ## Authors :
 -Hocine Merouana
+
 -Hager Elharty
+
 -Sleheddine Kastalli
 
