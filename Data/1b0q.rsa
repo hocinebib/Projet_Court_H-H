@@ -1,0 +1,17 @@
+REM  Relative accessibilites read from external file "/home/meraouna/Téléchargements/naccess2.1.1/standard.data"
+REM  File of summed (Sum) and % (per.) accessibilities for 
+REM RES _ NUM      All-atoms   Total-Side   Main-Chain    Non-polar    All polar
+REM                ABS   REL    ABS   REL    ABS   REL    ABS   REL    ABS   REL
+RES CYS A   1   111.99  83.4  42.12  43.5  69.88 186.2  44.80  45.7  67.19 184.8
+RES GLU A   2   151.35  87.9 136.85 101.6  14.50  38.7  56.35  93.5  95.01  84.9
+RES HIS A   3   230.92 126.3 167.52 113.9  63.40 177.1 142.47 146.7  88.45 103.2
+RES ARG A   5   191.44  80.2 146.26  72.7  45.17 120.4  87.36 112.3 104.08  64.7
+RES TRP A   6   205.68  82.5 200.55  94.9   5.12  13.4 171.19  90.3  34.49  57.8
+RES CYS A   7    98.43  73.3  71.98  74.4  26.45  70.5  75.85  77.5  22.58  62.1
+RES LYS A   8   127.48  63.5 109.84  67.3  17.64  47.0  65.59  56.3  61.89  73.5
+RES PRO A   9   111.69  82.0 109.64  91.4   2.05  12.6 109.64  90.6   2.05  13.5
+RES VAL A  10   213.90 141.2 163.80 143.3  50.11 134.8 185.56 160.7  28.34  78.8
+END  Absolute sums over single chains surface 
+CHAIN  1 A     1442.9       1148.5        294.3        938.8        504.1
+END  Absolute sums over all chains 
+TOTAL          1442.9       1148.5        294.3        938.8        504.1
