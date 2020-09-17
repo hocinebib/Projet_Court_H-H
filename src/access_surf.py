@@ -15,6 +15,12 @@ VDW_RADIUS = {'H':1.20, 'C':1.7, 'N':1.55, 'O':1.52, 'CL':1.75, 'F':1.47, 'P':1.
 def ratio(pts_exp, n):
     """
     Function that calculate the ratio between exposed points and the total points of the sphere
+    Arguments :
+        pts_exp : the exposed points (dictionary)
+        n : number of points (int)
+    Return :
+        a dictionary with the ratio of exposed points of each atom
+    
     """
     lst=[]
     new_dict={}
@@ -35,6 +41,11 @@ def ratio(pts_exp, n):
 def acc_surf(exp_pts_dc, atoms_df):
     """
     Function that calculate the solvant exposure area of each atom
+    Arguments :
+        exp_pts_dc : the ratio of the exposed points (dictionary)
+        atoms_df : the atoms dataframe (dataframe)
+    Return :
+        a dictionary of the surfaces values for each atom
     """
     surf_dc={}
     for key in exp_pts_dc :
@@ -43,7 +54,12 @@ def acc_surf(exp_pts_dc, atoms_df):
 
 def res_surf(surf_dc, atoms_df):
     """
-    Function that adds all the solvant exposure area of each atom of each residue . 
+    Function that adds all the solvant exposure area of each atom of each residue
+    Arguments :
+        surf_dc : the surfaces values (dictionary)
+        atoms_df : the atoms dataframe (dataframe)
+    Return :
+        dictionary with residus accessible surface
     """
     res = atoms_df.iloc[0,1]
     som = 0
