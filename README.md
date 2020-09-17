@@ -5,7 +5,7 @@
 Calcul de la surface accessible au solvant d’une protéine
 
 ## Requirements :
-Python3, Pandas, Argparse, Numpy, Scipy, Progressbar
+Python3, Pandas, Argparse, Numpy, Scipy, Progressbar, Time
 ### System :
 - Linux : This program works on a Linux environment.
 - Windows : It also works on Windows.
@@ -16,12 +16,13 @@ Python3, Pandas, Argparse, Numpy, Scipy, Progressbar
 - Matplotlib
 - Scipy
 - Progressbar
+- Time
 ### Data files :
-- The pdb file of the protein
+- The pdb file of the protein : 1b0q.pdb, 3i40.pdb
 ### Programs :
 - NACCESS
 ### Script files :
-**main.py** :
+**main.py**
 
 ## Usage :
 1. Cloning the repository :
