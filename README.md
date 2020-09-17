@@ -23,6 +23,11 @@ Python3, Pandas, Argparse, Numpy, Scipy, Progressbar, Time
 - NACCESS
 ### Script files :
 **main.py**
+**acoord_atom.py**
+**sph_dist**
+**access_surf.py**
+**time_complete.py**
+**parse_rsa.py**
 
 ## Usage :
 1. Cloning the repository :
@@ -35,7 +40,10 @@ you can also download the zip file than unzip it
 `python3 main.py 3i40.pdb 100`
 
 ## Result exemple :
-
+asa = 
+{'CYS': 117.73196149237984, 'GLU': 174.3376699676473, 'HIS': 200.3454305398364, 'ARG': 278.0520990749046, 'TRP': 290.17094113914544, 'LYS': 273.4042390575278, 'PRO': 171.00491593308368} 
+# asa = dictionnaire contenant les noms des residus en clef, et les surfaces accesible au solvant comme valeur. 
+# Resultat pour la protéine 1b0q.pd avec 100 point par sphères.
 ## Authors :
 -Hocine Merouana
 -Hager Elharty
