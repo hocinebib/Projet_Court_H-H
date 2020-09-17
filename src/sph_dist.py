@@ -43,6 +43,11 @@ def spheres(n):
 def pts_dist(pt1, pt2):
     """
     calculates distance between two points (or all points of 2 df)
+    Arguments :
+        pt1 : first point coordinates
+        pt2 : second point coordinates
+    Return :
+        distance value
     """
 
     squared_dist = np.sum((pt1-pt2)**2, axis = 0)
@@ -53,12 +58,20 @@ def pts_dist(pt1, pt2):
 def atom_dist_matrix(df_coor):
     """
     creates distance matrix between all atoms
+    Arguments :
+        df_coor : atoms dataframe (dataframe)
+    Return :
+        atoms distance matrix (dataframe)
     """
     return pd.DataFrame(distance_matrix(df_coor.iloc[:,3:],df_coor.iloc[:,3:]), index=df_coor.iloc[:,3:].index, columns=df_coor.iloc[:,3:].index)
 
 def threshold_dict(mtx):
     """
     creates a dictionary having as keys the atom and as values the atom neighbors
+    Arguments :
+        mtx : distance matrix (dataframe)
+    Return :
+        neighbor atoms dictionary
     """
     pbar = ProgressBar()
     r = []
@@ -82,6 +95,12 @@ def threshold_dict(mtx):
 def link_fct(df_coor, dico_trsh, n):
     """
     link between roll_sphere_bis and distance calculation
+    Arguments :
+        df_coor : atoms dataframe 
+        dico_trsh : atoms neighboors dictionary
+        n : number of points
+    Return :
+        dictionary of atoms letting water molecule passage
     """
     START = time.time()
     pbar = ProgressBar()
@@ -102,6 +121,11 @@ def link_fct(df_coor, dico_trsh, n):
 def roll_sphere_bis(atoms_df, n):
     """
     Function that changes the radius and the position of the sphere depending on the atom type and coordinates
+    Arguments :
+        atoms_df : atoms dataframe
+	n : number of points
+    Return :
+        list of sphere points coordinates
     """
     sph_lst=[]
     for row in atoms_df.iterrows():
@@ -116,6 +140,11 @@ def roll_sphere_bis(atoms_df, n):
 def spheres_dist(s1, s2):#, vdm_r):
     """
     calculates distance between points of 2 spheres
+    Arguments :
+        s1 : first sphere coordinates
+        s2 : second sphere coordinates
+    Return :
+        distance between 2 points
     """
     count = 0
     nonenf = False
