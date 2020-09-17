@@ -78,15 +78,16 @@ asa =
 
 asa = dictionnaire contenant les noms des residus en clef, et les surfaces accesible au solvant comme valeur. 
 
-  residu  accessibility
-0    CYS     114.244571
-1    GLU     174.425587
-2    HIS     200.267724
-3    ARG     278.468391
-4    TRP     290.106556
-5  CYS 1     117.709214
-6    LYS     273.497471
-7    PRO     171.048121
+|   | residu | accessibility |
+|---|--------|---------------|
+| 0 | CYS    | 114.244571    |
+| 1 | GLU    | 174.425587    |
+| 2 | HIS    | 200.267724    |
+| 3 | ARG    | 278.468391    |
+| 4 | TRP    | 290.106556    |
+| 5 | CYS 1  | 117.709214    |
+| 6 | LYS    | 273.497471    |
+| 7 | PRO    | 171.048121    |
 
 ---
 ## Authors :
