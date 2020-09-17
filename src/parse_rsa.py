@@ -17,7 +17,7 @@ def abs_acc(rsafile):
             if line.startswith("RES"):
 
                 rsa_dict['residu'].append(line[3:7].strip())
-                rsa_dict['acc'].append(line[14:23].strip())
+                rsa_dict['acc'].append(float(line[14:23].strip()))
                 rsa_dict['num'].append(line[11:14].strip())
     rsa_df = pd.DataFrame(rsa_dict)
 

@@ -43,6 +43,7 @@ def acc_surf(exp_pts_dc, atoms_df):
 
 def res_surf(surf_dc, atoms_df):
     """
+    Function that adds all the solvant exposure area of each atom of each residue . 
     """
     res = atoms_df.iloc[0,1]
     som = 0
@@ -52,7 +53,19 @@ def res_surf(surf_dc, atoms_df):
             som = som + surf_dc[key]
             prev_key=key
         else :
-            res_dc[atoms_df.iloc[int(prev_key),1]] = som
+            if atoms_df.iloc[int(prev_key),1] in res_dc :
+                if (atoms_df.iloc[int(prev_key),1]+' 1') in res_dc :
+                    if (atoms_df.iloc[int(prev_key),1]+' 2') in res_dc :
+                        if (atoms_df.iloc[int(prev_key),1]+' 3') in res_dc :
+                            res_dc[atoms_df.iloc[int(prev_key),1]+' 4']=som
+                        else :
+                            res_dc[atoms_df.iloc[int(prev_key),1]+' 3']=som
+                    else :                   
+                        res_dc[atoms_df.iloc[int(prev_key),1]+' 2']=som
+                else :
+                    res_dc[atoms_df.iloc[int(prev_key),1]+' 1']=som
+            else :
+                res_dc[atoms_df.iloc[int(prev_key),1]] = som
             res=atoms_df.iloc[int(key),1]
             som = 0 + surf_dc[key]
     return res_dc

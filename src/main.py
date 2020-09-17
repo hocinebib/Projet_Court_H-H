@@ -4,9 +4,12 @@ the main program of the project
 """
 
 import argparse
-import atom_coor_hager as ac
+import coor_atom as ac
 import sph_dist as sd
 import access_surf as acs
+import parse_rsa as pr
+import comp_plot as cp
+import pandas as pd
 
 if __name__ == "__main__":
 
@@ -16,15 +19,19 @@ if __name__ == "__main__":
 
 	PARSER.add_argument("nbr_pts", help="the number of points distributed on the spheres", type=int)
 
+	PARSER.add_argument("rsa_file", help="the rsa file that naccess gives for the same pdb", type=str)
+
 	ARGS = PARSER.parse_args()
 
 	PDB_FILE = ARGS.pdb_file
 
 	NBR_PTS = ARGS.nbr_pts
 
+	RSA_FILE = ARGS.rsa_file
+
 	print("1)- Reading pdb file and creating the dataframe")
 
-	ACD = atc=ac.coord(PDB_FILE)
+	ACD = ac.coord(PDB_FILE)
 
 	print("2)- Creating a distance matrix")
 
@@ -50,4 +57,30 @@ if __name__ == "__main__":
 
 	RS = acs.res_surf(NN, ACD)
 
-	print(RS)
+	res = []
+	acc = []
+	for key in RS :
+		res.append(key)
+		acc.append(RS[key])
+	dic = {}
+	dic['residu'] = res
+	dic['accessibility'] = acc
+
+	df=pd.DataFrame(dic)
+
+	print(df)
+
+	print("8)- Protein accessibility :")
+
+	s = sum(acc)
+
+	print(s)
+
+	print("9)- Parsing rsa file")
+
+	RSA = pr.abs_acc(RSA_FILE)
+
+	print("10)- Showing through a plot the difference between our results and Naccess results :")
+
+	cp.compare_plot(RSA['acc'].tolist(), df['accessibility'].tolist(), RSA['residu'].tolist())
+
