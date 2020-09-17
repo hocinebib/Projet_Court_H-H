@@ -3,12 +3,22 @@
 ## Description :
 
 Calcul de la surface accessible au solvant d’une protéine
-
+---
 ## Requirements :
 Python3, Pandas, Argparse, Numpy, Scipy, Progressbar, Time
+```bash
+$ conda create -n proj_env
+$ activate proj_env
+$ conda install pandas
+$ conda install -c conda-forge argparse
+$ conda install -c anaconda numpy
+$ conda install -c anaconda scipy
+$ conda install -c conda-forge progressbar
+```
 ### System :
 - Linux : This program works on a Linux environment.
 - Windows : It also works on Windows.
+
 ### Python Packages :
 - Pandas
 - Argparse
@@ -17,10 +27,13 @@ Python3, Pandas, Argparse, Numpy, Scipy, Progressbar, Time
 - Scipy
 - Progressbar
 - Time
+
 ### Data files :
 - The pdb file of the protein : 1b0q.pdb, 3i40.pdb
+
 ### Programs :
 - NACCESS
+
 ### Script files :
 **main.py**
 
@@ -33,17 +46,25 @@ Python3, Pandas, Argparse, Numpy, Scipy, Progressbar, Time
 **time_complete.py**
 
 **parse_rsa.py**
-
+---
 ## Usage :
 1. Cloning the repository :
-`git clone https://github.com/hocinebib/Projet_Court_H-H.git`
+```bash
+$ git clone https://github.com/hocinebib/Projet_Court_H-H.git
+```
 you can also download the zip file than unzip it
+
 2. Runing the code :
-`python3 main.py pdbfile nbr_of_pts`
+```bash
+$ python3 main.py pdbfile nbr_of_pts rsafile
+```
 
 ### Usage exemple :
-`python3 main.py 3i40.pdb 100`
-
+```bash
+$ cd Projet_Court_H-H
+$ python3 src/main.py Data/1b0q.pdb 100 Data/1b0q.rsa
+```
+---
 ## Result exemple :
 **Resultat pour la protéine 1b0q.pd avec 100 points par sphère.**
 
@@ -52,7 +73,17 @@ asa =
 
 asa = dictionnaire contenant les noms des residus en clef, et les surfaces accesible au solvant comme valeur. 
 
+  residu  accessibility
+0    CYS     114.244571
+1    GLU     174.425587
+2    HIS     200.267724
+3    ARG     278.468391
+4    TRP     290.106556
+5  CYS 1     117.709214
+6    LYS     273.497471
+7    PRO     171.048121
 
+---
 ## Authors :
 -Hocine Merouana
 
