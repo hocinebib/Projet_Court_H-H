@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 """
-the main program of the project
+Main program of the project
 """
 
 import argparse
