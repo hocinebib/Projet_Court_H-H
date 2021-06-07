@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 """
-module that is used for calculating accessibility
+module used for calculating accessibility
 """
 import numpy as np
 
