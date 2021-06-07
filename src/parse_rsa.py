@@ -6,7 +6,7 @@ import pandas as pd
 
 def abs_acc(rsafile):
     """
-    extracts accessibility 
+    Function that extracts residu name, accessibility residu & number residu of  
     """
     rsa_dict = {'residu':[], 'acc':[], 'num':[]}
 
