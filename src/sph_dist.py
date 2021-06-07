@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 """
-module used for selecting neighboors, creating spheres and calculating distances
+Module used for selecting neighboors, creating spheres and calculating distances
 
 """
 import numpy as np
@@ -42,7 +42,7 @@ def spheres(n):
 
 def pts_dist(pt1, pt2):
     """
-    calculates distance between two points (or all points of 2 df)
+    Function calculates distance between two points (or all points of 2 df ???)
     Arguments :
         pt1 : first point coordinates
         pt2 : second point coordinates
@@ -57,7 +57,7 @@ def pts_dist(pt1, pt2):
 
 def atom_dist_matrix(df_coor):
     """
-    creates distance matrix between all atoms
+    Function creates distance matrix between all atoms
     Arguments :
         df_coor : atoms dataframe (dataframe)
     Return :
@@ -67,7 +67,7 @@ def atom_dist_matrix(df_coor):
 
 def threshold_dict(mtx):
     """
-    creates a dictionary having as keys the atom and as values the atom neighbors
+    Function that creates a dictionary having as keys the atom and as values the atom neighbors
     Arguments :
         mtx : distance matrix (dataframe)
     Return :
