@@ -1,11 +1,11 @@
 """
-program that reads a pdb file and extracts each atom coordinates
+Program that reads a PDB file and extracts each atom coordinates
 """
 import pandas as pd
 
 def coord(fichier_pdb):
     """
-    the function that reads the pdb file and extracts the atoms coordinates
+    The function that reads the PDB file and extracts the atoms coordinates
     it returns as a result a list of lists containing the atom name and its 
     coordinates
     """
@@ -15,26 +15,25 @@ def coord(fichier_pdb):
         for ligne in f_pdb :
             if ligne[0:4] == "ATOM":
             
-                # Création du dictionnaire vide.
+                # Creating the empty dictionary. 
                 dico = {}
                 
-                # Extraction de l'atome
+                # Atom extraction.
                 dico["atom"] = str(ligne[77:79].strip())
                 
-                # Extraction du nom du résidu.
+                # Extraction of the name of the residue.
                 dico["residu "] = str(ligne[17:21].strip())
                 
-                # Extraction du numéro du résidu.
+                # Extraction of the residue number.
                 dico["N° resid"] = int(ligne[22:26].strip())
                 
-                # Extraction de la coordonnée x.
+                # Extraction of the x coordinate.
                 dico["x"] = float(ligne[30:38].strip())
                 
-                # Extraction de la coordonnée y.
-                
+                # Extraction of the y coordinate.
                 dico["y"] = float(ligne[38:46].strip())
-                # Extraction de la coordonnée z.
-                
+		
+                # Extraction of the z coordinate. 
                 dico["z"] = float(ligne[46:54].strip())
                 coor_lst.append(dico)
                 
