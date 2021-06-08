@@ -28,7 +28,6 @@ def ratio(pts_exp, n):
     for key in pts_exp :
         if key.split()[0] != prev :
             new_dict[prev] = [lst, len(lst)]
-            print(prev, new_dict[prev])
             lst = []
         if pts_exp[key] != 0 :
             lst.append(pts_exp[key])
@@ -123,7 +122,7 @@ def res_surf(surf_dc, atoms_df):
         for a in dic[k]:
             if k not in res_dc:
                 res_dc[k] = 0
-            res_dc[k] += NN[str(a)]
+            res_dc[k] += surf_dc[str(a)]
 
     return res_dc
 

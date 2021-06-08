@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
 	df=pd.DataFrame(dic)
 
-	df.to_csv('../Data/'+PDB_FILE..split('/')[-1].split('.')[0]+'.csv')
+	df.to_csv('Results/'+PDB_FILE.split('/')[-1].split('.')[0]+'.csv')
 
 	print(df)
 
