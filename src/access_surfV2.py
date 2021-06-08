@@ -24,22 +24,26 @@ def ratio(pts_exp, n):
     """
     lst=[]
     new_dict={}
-    count = 0
+    prev = '0'
     for key in pts_exp :
-        if int(key.split()[0]) != count :
-            count += 1
-            new_dict[key.split()[0]] = [lst, len(lst)]
+        if key.split()[0] != prev :
+            new_dict[prev] = [lst, len(lst)]
+            print(prev, new_dict[prev])
             lst = []
         if pts_exp[key] != 0 :
             lst.append(pts_exp[key])
+        prev = key.split()[0]
+    new_dict[prev] = [lst, len(lst)]
     new_dict2={}
     for key in new_dict :
         if new_dict[key][1] != 0:
-            new_dict2[key] = (sum(new_dict[key][0]) / new_dict[key][1]) / n
+            new_dict2[key] = (sum(new_dict[key][0]) / (new_dict[key][1]*96))
         else:
             new_dict2[key] = 0
 
     return new_dict2
+
+
 
 def acc_surf(exp_pts_dc, atoms_df):
     """
@@ -55,6 +59,8 @@ def acc_surf(exp_pts_dc, atoms_df):
         surf_dc[key] = exp_pts_dc[key] * 4 * np.pi + (VDW_RADIUS[atoms_df.iloc[int(key),0]])**2
     return surf_dc
 
+
+
 def res_surf(surf_dc, atoms_df):
     """
     Function that adds all the solvant exposure area of each atom of each residue
@@ -64,29 +70,61 @@ def res_surf(surf_dc, atoms_df):
     Return :
         dictionary with residus accessible surface
     """
-    res = atoms_df.iloc[0,1]
-    som = 0
     res_dc = {}
-    for key in surf_dc :
-        if atoms_df.iloc[int(key),1] == res :
-            som = som + surf_dc[key]
-            prev_key=key
-        else :
-            if atoms_df.iloc[int(prev_key),1] in res_dc :
-                if (atoms_df.iloc[int(prev_key),1]+' 1') in res_dc :
-                    if (atoms_df.iloc[int(prev_key),1]+' 2') in res_dc :
-                        if (atoms_df.iloc[int(prev_key),1]+' 3') in res_dc :
-                            res_dc[atoms_df.iloc[int(prev_key),1]+' 4']=som
-                        else :
-                            res_dc[atoms_df.iloc[int(prev_key),1]+' 3']=som
-                    else :                   
-                        res_dc[atoms_df.iloc[int(prev_key),1]+' 2']=som
-                else :
-                    res_dc[atoms_df.iloc[int(prev_key),1]+' 1']=som
-            else :
-                res_dc[atoms_df.iloc[int(prev_key),1]] = som
-            res=atoms_df.iloc[int(key),1]
-            som = 0 + surf_dc[key]
+    
+    i = 1
+
+    for r in atoms_df.iterrows():
+        if r[0] == 0:
+            prev = r[1][1]
+        if r[1][1] not in res_dc:
+            res_dc[r[1][1]] = 0
+            res_dc[r[1][1]] = surf_dc[str(r[0])]
+        else:
+            if r[1][1] == prev:
+                res_dc[r[1][1]] += surf_dc[str(r[0])]
+            else:
+                i += 1
+                res_dc[r[1][1]+' '+str(i)] = 0
+                res_dc[r[1][1]+' '+str(i)] = surf_dc[str(r[0])]
+        prev = r[1][1]
+    return res_dc
+
+
+def res_surf(surf_dc, atoms_df):
+    """
+    Function that adds all the solvant exposure area of each atom of each residue
+    Arguments :
+        surf_dc : the surfaces values (dictionary)
+        atoms_df : the atoms dataframe (dataframe)
+    Return :
+        dictionary with residus accessible surface
+    """
+    dic = {}
+    i = 0
+
+    for r in atoms_df.iterrows():
+        if r[0] == 0:
+            prev = str(r[1][1])+' '+str(r[1][2])
+        if str(r[1][1])+' '+str(r[1][1]) == prev:
+            if str(i)+' '+str(r[1][1]) not in dic:
+                dic[str(i)+' '+str(r[1][1])] = []
+            dic[str(i)+' '+str(r[1][1])].append(r[0])
+        elif str(r[1][1])+' '+str(r[1][1]) != prev:
+            prev = str(r[1][1])+' '+str(r[1][1])
+            i += 1
+            if str(i)+' '+str(r[1][1]) not in dic:
+                dic[str(i)+' '+str(r[1][1])] = []
+            dic[str(i)+' '+str(r[1][1])].append(r[0])
+        
+    res_dc = {}
+
+    for k in dic:
+        for a in dic[k]:
+            if k not in res_dc:
+                res_dc[k] = 0
+            res_dc[k] += NN[str(a)]
+
     return res_dc
 
 if __name__ == "__main__":
