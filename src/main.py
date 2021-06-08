@@ -60,13 +60,15 @@ if __name__ == "__main__":
 	res = []
 	acc = []
 	for key in RS :
-		res.append(key)
+		res.append(key.split()[1])
 		acc.append(RS[key])
 	dic = {}
 	dic['residu'] = res
 	dic['accessibility'] = acc
 
 	df=pd.DataFrame(dic)
+
+	df.to_csv('Results/'+PDB_FILE.split('/')[-1].split('.')[0]+'.csv')
 
 	print(df)
 

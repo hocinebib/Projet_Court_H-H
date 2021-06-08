@@ -10,6 +10,44 @@ import time_complete as tc
 from scipy.spatial import distance_matrix
 from progressbar import ProgressBar
 
+def coord(fichier_pdb):
+    """
+    The function that reads the PDB file and extracts the atoms coordinates
+    it returns as a result a list of lists containing the atom name and its 
+    coordinates
+    """
+
+    with open(fichier_pdb, "r") as f_pdb:
+        coor_lst = []
+        for ligne in f_pdb :
+            if ligne[0:4] == "ATOM":
+            
+                # Creating the empty dictionary. 
+                dico = {}
+                
+                # Atom extraction.
+                dico["atom"] = str(ligne[77:79].strip())
+                
+                # Extraction of the name of the residue.
+                dico["residu "] = str(ligne[17:21].strip())
+                
+                # Extraction of the residue number.
+                dico["N° resid"] = int(ligne[22:26].strip())
+                
+                # Extraction of the x coordinate.
+                dico["x"] = float(ligne[30:38].strip())
+                
+                # Extraction of the y coordinate.
+                dico["y"] = float(ligne[38:46].strip())
+        
+                # Extraction of the z coordinate. 
+                dico["z"] = float(ligne[46:54].strip())
+                coor_lst.append(dico)
+                
+        atoms_df = pd.DataFrame(coor_lst)    
+    return atoms_df
+
+
 VDW_RADIUS = {'H':1.20, 'C':1.7, 'N':1.55, 'O':1.52, 'CL':1.75, 'F':1.47, 'P':1.80,
 'S':1.80, 'CU':1.40, 'HE':1.40, 'LI':1.82, 'BE':1.53, 'B':1.92, 'NE':1.54, 'NA':2.27,
 'MG':1.73, 'AL':1.84, 'SI':2.10, 'AR':1.88, 'K':2.75, 'CA':2.31, 'SC':2.11, 'NI':1.63,
@@ -19,7 +57,7 @@ VDW_RADIUS = {'H':1.20, 'C':1.7, 'N':1.55, 'O':1.52, 'CL':1.75, 'F':1.47, 'P':1.
 'PB':2.02, 'BI':2.07, 'PO':1.97, 'AT':2.02, 'RN':2.20, 'FR':3.48, 'RA':2.83, 'U':1.86}
 
 TRSHD = VDW_RADIUS['C'] * 3 + VDW_RADIUS['N'] + 1.4
-#eau 1.4 A tryptophane 3c+n
+#water 1.4 A tryptophane 3c+n
 
 def spheres(n):
     """
@@ -76,7 +114,7 @@ def threshold_dict(mtx):
     pbar = ProgressBar()
     r = []
     i = []
-    TRS_MAX = VDW_RADIUS['C'] * 2 + VDW_RADIUS['N'] + (1.4 * 2)
+    TRS_MAX = VDW_RADIUS['C'] * 2 + VDW_RADIUS['N'] #+ (1.4 * 2)
 
     for index, row in mtx.iterrows():
         r.append(row)
@@ -110,10 +148,15 @@ def link_fct(df_coor, dico_trsh, n):
         lst.append(key)
         for neighb in dico_trsh[key]:
             lst.append(neighb)
-        sph_lst = roll_sphere_bis(df_coor.iloc[lst,], n)
+        sph_lst = roll_sphere_bis(df_coor.iloc[[lst[0]],], n)
+        
+        centers = []
 
-        for i in range(len(sph_lst)-1):
-            new_dico[str(key) + " " + str(i+1)] = spheres_dist(sph_lst[0], sph_lst[i+1])
+        for r in df_coor.iloc[lst[1:],].iterrows():
+            centers.append([r[1][3], r[1][4], r[1][5], VDW_RADIUS[r[1][0]]])
+
+        for i in range(len(centers)-1):
+            new_dico[str(key) + " " + str(i+1)] = spheres_dist(sph_lst[0], centers[i])
     END = time.time()
     print("time elapsed :" + tc.complete_time(START, END))
     return new_dico
@@ -123,7 +166,7 @@ def roll_sphere_bis(atoms_df, n):
     Function that changes the radius and the position of the sphere depending on the atom type and coordinates
     Arguments :
         atoms_df : atoms dataframe
-	n : number of points
+    n : number of points
     Return :
         list of sphere points coordinates
     """
@@ -149,12 +192,11 @@ def spheres_dist(s1, s2):#, vdm_r):
     count = 0
     nonenf = False
     for i in range(len(s1)):
-        for j in range(len(s1)):
-            if pts_dist(s1[i],s2[j]) < 2.8 :
-                nonenf = False
-                break
-            else :
-                nonenf = True
+        if pts_dist(s1[i],s2[0:3]) < 1.4 + s2[3] :
+            nonenf = False
+            break
+        else :
+            nonenf = True
         if nonenf :
             count += 1
     return count
