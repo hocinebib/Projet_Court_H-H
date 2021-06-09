@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 """
-module used for calculating accessibility
+module used for calculating surface accessibility 
 """
 import numpy as np
 
@@ -51,7 +51,7 @@ def acc_surf(exp_pts_dc, atoms_df):
         exp_pts_dc : the ratio of the exposed points (dictionary)
         atoms_df : the atoms dataframe (dataframe)
     Return :
-        a dictionary of the surfaces values for each atom
+        a dictionary of the surface accessibility values for each atom
     """
     surf_dc={}
     for key in exp_pts_dc :
@@ -60,14 +60,14 @@ def acc_surf(exp_pts_dc, atoms_df):
 
 
 
-def res_surf(surf_dc, atoms_df):
+def res_surf(surf_dc, atoms_df): # Souci ici deux fois la meme fct ...
     """
     Function that adds all the solvant exposure area of each atom of each residue
     Arguments :
         surf_dc : the surfaces values (dictionary)
         atoms_df : the atoms dataframe (dataframe)
     Return :
-        dictionary with residus accessible surface
+        dictionary with residu surface accessibility
     """
     res_dc = {}
     
