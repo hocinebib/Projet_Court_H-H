@@ -19,7 +19,7 @@ def ratio(pts_exp, n):
         pts_exp : the exposed points (dictionary)
         n : number of points (int)
     Return :
-        a dictionary with the ratio of exposed points of each atom
+        new_dict2 : dictionary with the ratio of exposed points of each atom
     
     """
     lst=[]
@@ -42,8 +42,6 @@ def ratio(pts_exp, n):
 
     return new_dict2
 
-
-
 def acc_surf(exp_pts_dc, atoms_df):
     """
     Function that calculate the solvant exposure area of each atom
@@ -51,44 +49,12 @@ def acc_surf(exp_pts_dc, atoms_df):
         exp_pts_dc : the ratio of the exposed points (dictionary)
         atoms_df : the atoms dataframe (dataframe)
     Return :
-        a dictionary of the surface accessibility values for each atom
+        surf_dc : a dictionary of the surface accessibility values for each atom
     """
     surf_dc={}
     for key in exp_pts_dc :
         surf_dc[key] = exp_pts_dc[key] * 4 * np.pi + (VDW_RADIUS[atoms_df.iloc[int(key),0]])**2
     return surf_dc
-
-
-
-def res_surf(surf_dc, atoms_df): # Souci ici deux fois la meme fct ...
-    """
-    Function that adds all the solvant exposure area of each atom of each residue
-    Arguments :
-        surf_dc : the surfaces values (dictionary)
-        atoms_df : the atoms dataframe (dataframe)
-    Return :
-        dictionary with residu surface accessibility
-    """
-    res_dc = {}
-    
-    i = 1
-
-    for r in atoms_df.iterrows():
-        if r[0] == 0:
-            prev = r[1][1]
-        if r[1][1] not in res_dc:
-            res_dc[r[1][1]] = 0
-            res_dc[r[1][1]] = surf_dc[str(r[0])]
-        else:
-            if r[1][1] == prev:
-                res_dc[r[1][1]] += surf_dc[str(r[0])]
-            else:
-                i += 1
-                res_dc[r[1][1]+' '+str(i)] = 0
-                res_dc[r[1][1]+' '+str(i)] = surf_dc[str(r[0])]
-        prev = r[1][1]
-    return res_dc
-
 
 def res_surf(surf_dc, atoms_df):
     """
@@ -97,7 +63,7 @@ def res_surf(surf_dc, atoms_df):
         surf_dc : the surfaces values (dictionary)
         atoms_df : the atoms dataframe (dataframe)
     Return :
-        dictionary with residus accessible surface
+        res_dc : dictionary with residus accessible surface
     """
     dic = {}
     i = 0
