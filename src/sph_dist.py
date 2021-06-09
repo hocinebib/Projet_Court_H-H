@@ -63,7 +63,9 @@ def spheres(n):
     """
     Function that create sphere with n points
     Arugment :
-    n = number of points
+    	n : number of points
+    Return : 
+    	points : ????
     """
     indices = np.arange(0, n, dtype=float) + 0.5
     golden_angle = np.pi * (1 + 5**0.5)
@@ -85,7 +87,7 @@ def pts_dist(pt1, pt2):
         pt1 : first point coordinates
         pt2 : second point coordinates
     Return :
-        distance value
+       dist : distance value
     """
 
     squared_dist = np.sum((pt1-pt2)**2, axis = 0)
@@ -97,9 +99,9 @@ def atom_dist_matrix(df_coor):
     """
     Function creates distance matrix between all atoms
     Arguments :
-        df_coor : atoms dataframe (dataframe)
+        df_coor : atoms dataframe 
     Return :
-        atoms distance matrix (dataframe)
+        Data frame of atoms distance  
     """
     return pd.DataFrame(distance_matrix(df_coor.iloc[:,3:],df_coor.iloc[:,3:]), index=df_coor.iloc[:,3:].index, columns=df_coor.iloc[:,3:].index)
 
@@ -109,7 +111,7 @@ def threshold_dict(mtx):
     Arguments :
         mtx : distance matrix (dataframe)
     Return :
-        neighbor atoms dictionary
+        dico_trsh : neighbor atoms dictionary
     """
     pbar = ProgressBar()
     r = []
@@ -134,11 +136,11 @@ def link_fct(df_coor, dico_trsh, n):
     """
     link between roll_sphere_bis and distance calculation
     Arguments :
-        df_coor : atoms dataframe 
+        df_coor : dataframe atoms coordinates
         dico_trsh : atoms neighboors dictionary
         n : number of points
     Return :
-        dictionary of atoms letting water molecule passage
+        new_dico : dictionary of atoms letting water molecule passage ??
     """
     START = time.time()
     pbar = ProgressBar()
@@ -166,9 +168,9 @@ def roll_sphere_bis(atoms_df, n):
     Function that changes the radius and the position of the sphere depending on the atom type and coordinates
     Arguments :
         atoms_df : atoms dataframe
-    n : number of points
+    	n : number of points
     Return :
-        list of sphere points coordinates
+        sph_lst : list of sphere points coordinates
     """
     sph_lst=[]
     for row in atoms_df.iterrows():
@@ -182,12 +184,12 @@ def roll_sphere_bis(atoms_df, n):
 
 def spheres_dist(s1, s2):#, vdm_r):
     """
-    calculates distance between points of 2 spheres
+    calculates distance between points of 2 spheres ???
     Arguments :
         s1 : first sphere coordinates
         s2 : second sphere coordinates
     Return :
-        distance between 2 points
+        count : distance between 2 points ???
     """
     count = 0
     nonenf = False
@@ -199,7 +201,7 @@ def spheres_dist(s1, s2):#, vdm_r):
             nonenf = True
         if nonenf :
             count += 1
-    return count
+    return count # ???
 
 
 if __name__ == "__main__":
