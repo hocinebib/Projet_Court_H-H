@@ -1,12 +1,12 @@
 #! /usr/bin/python3
 """
-plots two lists of values
+plot two lists of values
 """
 from matplotlib import pyplot as plt
 
 def compare_plot(lst_rsa, lst_pjct, res_lst):
     """
-        Plots the accessibility values obtained by our program and the ones given by naccess
+        Plot the accessibility values obtained by our program and the ones given by naccess
         Arguments :
             lst_rsa : list of naccess residus accessibility
             lst_pjct : list of our residus accessibility
