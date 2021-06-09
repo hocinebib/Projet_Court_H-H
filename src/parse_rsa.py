@@ -1,16 +1,16 @@
 #! /usr/bin/python3
 """
-?????
+Module that parses Naccess file 
 """
 import pandas as pd
 
 def abs_acc(rsafile):
     """
-    Function that extracts residu name, accessibility residu & number residu.
+    Function that extracts residu name, accessibility residu & number residu of Nacess file.
     Argument : 
-	rsafile : ... ?????
+	rsafile : Naccess file
     Return :
-    	rsa_df : Data Frame of .... ???
+    	rsa_df : Data Frame 
     	
     """
     rsa_dict = {'residu':[], 'acc':[], 'num':[]}
