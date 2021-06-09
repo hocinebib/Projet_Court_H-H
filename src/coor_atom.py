@@ -3,14 +3,18 @@ Program that reads a PDB file and extracts each atom coordinates
 """
 import pandas as pd
 
-def coord(fichier_pdb):
+def coord(file):
     """
     The function that reads the PDB file and extracts the atoms coordinates
     it returns as a result a list of lists containing the atom name and its 
-    coordinates
+    coordinates. 
+    Arguments :
+        file : the PDB file
+    Return :
+        atoms_df : Data frame of atoms coordinates
     """
 
-    with open(fichier_pdb, "r") as f_pdb:
+    with open(file, "r") as f_pdb:
         coor_lst = []
         for ligne in f_pdb :
             if ligne[0:4] == "ATOM":
