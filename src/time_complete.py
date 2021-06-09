@@ -1,12 +1,15 @@
 #! /usr/bin/python3
 """
-to calculate elapsed time
+Module calculate elapsed time
 """
 import time
 
 def complete_time(start, end):
     """
     function that gives the time duration in hours minutes and seconds
+    Arguments : 
+    	start : 
+	end : 
     """
     total = end - start
     hrs = total // 3600
