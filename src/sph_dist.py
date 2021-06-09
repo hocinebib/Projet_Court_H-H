@@ -1,7 +1,6 @@
 #! /usr/bin/python3
 """
 Module used for selecting neighboors, creating spheres and calculating distances
-
 """
 import numpy as np
 import pandas as pd
@@ -9,44 +8,6 @@ import time
 import time_complete as tc
 from scipy.spatial import distance_matrix
 from progressbar import ProgressBar
-
-def coord(fichier_pdb):
-    """
-    The function that reads the PDB file and extracts the atoms coordinates
-    it returns as a result a list of lists containing the atom name and its 
-    coordinates
-    """
-
-    with open(fichier_pdb, "r") as f_pdb:
-        coor_lst = []
-        for ligne in f_pdb :
-            if ligne[0:4] == "ATOM":
-            
-                # Creating the empty dictionary. 
-                dico = {}
-                
-                # Atom extraction.
-                dico["atom"] = str(ligne[77:79].strip())
-                
-                # Extraction of the name of the residue.
-                dico["residu "] = str(ligne[17:21].strip())
-                
-                # Extraction of the residue number.
-                dico["N° resid"] = int(ligne[22:26].strip())
-                
-                # Extraction of the x coordinate.
-                dico["x"] = float(ligne[30:38].strip())
-                
-                # Extraction of the y coordinate.
-                dico["y"] = float(ligne[38:46].strip())
-        
-                # Extraction of the z coordinate. 
-                dico["z"] = float(ligne[46:54].strip())
-                coor_lst.append(dico)
-                
-        atoms_df = pd.DataFrame(coor_lst)    
-    return atoms_df
-
 
 VDW_RADIUS = {'H':1.20, 'C':1.7, 'N':1.55, 'O':1.52, 'CL':1.75, 'F':1.47, 'P':1.80,
 'S':1.80, 'CU':1.40, 'HE':1.40, 'LI':1.82, 'BE':1.53, 'B':1.92, 'NE':1.54, 'NA':2.27,
@@ -65,7 +26,7 @@ def spheres(n):
     Arugment :
     	n : number of points
     Return : 
-    	points : ????
+    	points : array with 3D coordinates of the sphere
     """
     indices = np.arange(0, n, dtype=float) + 0.5
     golden_angle = np.pi * (1 + 5**0.5)
@@ -82,7 +43,7 @@ def spheres(n):
 
 def pts_dist(pt1, pt2):
     """
-    Function calculates distance between two points (or all points of 2 df ???)
+    Function calculates distance between two points
     Arguments :
         pt1 : first point coordinates
         pt2 : second point coordinates
@@ -99,9 +60,9 @@ def atom_dist_matrix(df_coor):
     """
     Function creates distance matrix between all atoms
     Arguments :
-        df_coor : atoms dataframe 
+        df_coor : atoms coordinates dataframe of the PDB file 
     Return :
-        Data frame of atoms distance  
+        Data frame of atoms distances
     """
     return pd.DataFrame(distance_matrix(df_coor.iloc[:,3:],df_coor.iloc[:,3:]), index=df_coor.iloc[:,3:].index, columns=df_coor.iloc[:,3:].index)
 
@@ -136,11 +97,11 @@ def link_fct(df_coor, dico_trsh, n):
     """
     link between roll_sphere_bis and distance calculation
     Arguments :
-        df_coor : dataframe atoms coordinates
+        df_coor : atoms coordinates dataframe
         dico_trsh : atoms neighboors dictionary
         n : number of points
     Return :
-        new_dico : dictionary of atoms letting water molecule passage ??
+        new_dico : dictionary of atoms letting water molecule passage 
     """
     START = time.time()
     pbar = ProgressBar()
@@ -182,14 +143,14 @@ def roll_sphere_bis(atoms_df, n):
         sph_lst.append(sphere_pts)
     return sph_lst
 
-def spheres_dist(s1, s2):#, vdm_r):
+def spheres_dist(s1, s2):
     """
-    calculates distance between points of 2 spheres ???
+    Calculates distance between the center of one sphere and all the points of the second sphere. 
     Arguments :
-        s1 : first sphere coordinates
-        s2 : second sphere coordinates
+        s1 : coordinates of all the sphere's points
+        s2 : coordinates of the other sphere's center 
     Return :
-        count : distance between 2 points ???
+        count : number of points accessible to the probe.
     """
     count = 0
     nonenf = False
@@ -201,7 +162,7 @@ def spheres_dist(s1, s2):#, vdm_r):
             nonenf = True
         if nonenf :
             count += 1
-    return count # ???
+    return count
 
 
 if __name__ == "__main__":
