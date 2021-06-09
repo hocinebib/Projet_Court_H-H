@@ -1,12 +1,17 @@
 #! /usr/bin/python3
 """
-
+?????
 """
 import pandas as pd
 
 def abs_acc(rsafile):
     """
-    Function that extracts residu name, accessibility residu & number residu of  
+    Function that extracts residu name, accessibility residu & number residu.
+    Argument : 
+	rsafile : ... ?????
+    Return :
+    	rsa_df : Data Frame of .... ???
+    	
     """
     rsa_dict = {'residu':[], 'acc':[], 'num':[]}
 
