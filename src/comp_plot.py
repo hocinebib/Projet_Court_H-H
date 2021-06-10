@@ -14,7 +14,6 @@ def compare_plot(lst_rsa, lst_pjct, res_lst):
     """
     compare = []
     for i in range(len(lst_rsa)-(len(lst_rsa)-len(lst_pjct))):
-        print(i)
         compare.append(abs(lst_rsa[i]-lst_pjct[i]))
     plt.plot(lst_rsa, label="Naccess result")
     plt.plot(lst_pjct, label="Our result")

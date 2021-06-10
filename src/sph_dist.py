@@ -155,9 +155,9 @@ def spheres_dist(s1, s2):
     count = 0
     nonenf = False
     for i in range(len(s1)):
-        if pts_dist(s1[i],s2[0:3]) < 1.4 + s2[3] :
+        if pts_dist(s1[i],s2[0:3]) < 2.8 + s2[3] :
             nonenf = False
-            break
+            #break
         else :
             nonenf = True
         if nonenf :
