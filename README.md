@@ -3,7 +3,7 @@
 ---
 ## Description :
 
-Calcul de la surface accessible au solvant d’une protéine
+Solvent accessible surface of a protein
 
 ---
 ## Requirements :
@@ -73,21 +73,19 @@ $ python3 src/main.py Data/1b0q.pdb 100 Data/1b0q.rsa
 ## Result exemple :
 **Resultat pour la protéine 1b0q.pd avec 100 points par sphère.**
 
-asa = 
-{'CYS': 117.73196149237984, 'GLU': 174.3376699676473, 'HIS': 200.3454305398364, 'ARG': 278.0520990749046, 'TRP': 290.17094113914544, 'LYS': 273.4042390575278, 'PRO': 171.00491593308368} 
-
 asa = dictionnaire contenant les noms des residus en clef, et les surfaces accesible au solvant comme valeur. 
 
 |   | residu | accessibility |
 |---|--------|---------------|
-| 0 | CYS    | 114.244571    |
-| 1 | GLU    | 174.425587    |
-| 2 | HIS    | 200.267724    |
-| 3 | ARG    | 278.468391    |
-| 4 | TRP    | 290.106556    |
-| 5 | CYS 1  | 117.709214    |
-| 6 | LYS    | 273.497471    |
-| 7 | PRO    | 171.048121    |
+| 0 | CYS    | 85.2575499    |
+| 1 | GLU    | 120.727667    |
+| 2 | HIS    | 144.624399    |
+| 3 | ARG    | 184.331165    |
+| 4 | TRP    | 200.036144    |
+| 5 | CYS    | 80.8248480    |
+| 6 | LYS    | 183.349323    |
+| 7 | PRO    | 119.654651    |
+| 8 | VAL 	 | 100.306204    |
 
 ---
 ## Authors :
