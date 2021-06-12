@@ -77,7 +77,7 @@ def threshold_dict(mtx):
     pbar = ProgressBar()
     r = []
     i = []
-    TRS_MAX = VDW_RADIUS['C'] * 2 + VDW_RADIUS['N'] #+ (1.4 * 2)
+    TRS_MAX = 1.4 + VDW_RADIUS['S']*2
 
     for index, row in mtx.iterrows():
         r.append(row)
