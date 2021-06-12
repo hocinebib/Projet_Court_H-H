@@ -10,8 +10,12 @@ import access_surf as acs
 import parse_rsa as pr
 import comp_plot as cp
 import pandas as pd
+import time
+import time_complete as tc
 
 if __name__ == "__main__":
+
+	START = time.time()
 
 	PARSER = argparse.ArgumentParser()
 
@@ -82,7 +86,12 @@ if __name__ == "__main__":
 
 	RSA = pr.abs_acc(RSA_FILE)
 
+	END = time.time()
+
+	print("duration of the programm : ", tc.complete_time(START, END))
+
 	print("10)- Showing through a plot the difference between our results and Naccess results :")
 
 	cp.compare_plot(RSA['acc'].tolist(), df['accessibility'].tolist(), RSA['residu'].tolist())
+
 
