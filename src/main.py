@@ -1,6 +1,11 @@
 #! /usr/bin/python3
 """
 Main program of the project
+
+Usage exemple :
+	
+	python main.py 1b0q.pdb 96 1b0q.rsa
+
 """
 
 import argparse
