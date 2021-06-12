@@ -4,12 +4,13 @@ Module calculate elapsed time
 """
 import time
 
+
 def complete_time(start, end):
     """
     function that gives the time duration in hours minutes and seconds
-    Arguments : 
-    	start : 
-	end : 
+    Arguments :
+        start :
+    end :
     """
     total = end - start
     hrs = total // 3600
@@ -22,6 +23,7 @@ def complete_time(start, end):
     else:
         return "{:3.0f} h {:2.0f} min {:2.0f} sec".format(hrs, minu, sec)
 
+
 if __name__ == "__main__":
-	import time_complete
-	print(help(time_complete))
+    import time_complete
+    print(help(time_complete))

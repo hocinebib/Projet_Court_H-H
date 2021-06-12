@@ -1,22 +1,24 @@
 #! /usr/bin/python3
 """
-Module that parses Naccess file 
+Module that parses Naccess file
 """
 import pandas as pd
 
+
 def abs_acc(rsafile):
     """
-    Function that extracts residu name, accessibility residu & number residu of Nacess file.
-    Argument : 
-	rsafile : Naccess file
+    Function that extracts residu name, accessibility residu & number residu
+    of Nacess file.
+    Argument :
+    rsafile : Naccess file
     Return :
-    	rsa_df : Data Frame 
-    	
+        rsa_df : Data Frame
+
     """
-    rsa_dict = {'residu':[], 'acc':[], 'num':[]}
+    rsa_dict = {'residu': [], 'acc': [], 'num': []}
 
     with open(rsafile, 'r') as rsa:
-        
+
         for line in rsa:
 
             if line.startswith("RES"):
@@ -29,7 +31,6 @@ def abs_acc(rsafile):
     return rsa_df
 
 
-
 if __name__ == "__main__":
-	import parse_rsa
-	print(help(parse_rsa))
+    import parse_rsa
+    print(help(parse_rsa))
