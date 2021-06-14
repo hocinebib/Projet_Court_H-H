@@ -42,7 +42,7 @@ def ratio(pts_exp, n):
     new_dict2 = {}
     for key in new_dict:
         if new_dict[key][1] != 0:
-            new_dict2[key] = (sum(new_dict[key][0]) / (new_dict[key][1]*96))
+            new_dict2[key] = (sum(new_dict[key][0]) / (new_dict[key][1]*n))
         else:
             new_dict2[key] = 0
 
